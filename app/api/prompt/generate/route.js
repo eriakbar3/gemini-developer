@@ -31,7 +31,8 @@ export async function POST(request) {
     const targetLanguage = languageNames[language] || "English";
 
     // Build the meta-prompt for Gemini
-    const metaPrompt = `You are an expert prompt engineer. Your task is to improve and optimize the user's input into a high-quality, effective prompt.
+    const metaPrompt = `
+    You are a world-class Prompt Engineer. Transform the given brief into one complete, well-structured, ready-to-use prompt for an advanced AI model. Rules: Output only pure Markdown. No explanations, comments, or extra text. Use strict English. Deliver a single, self-contained prompt ready for direct use.
 
 User's Input:
 "${inputText}"
@@ -48,7 +49,7 @@ Please generate an improved prompt that:
 Generate ONLY the improved prompt text, without any explanations or additional commentary. The output should be a ready-to-use prompt that can be copied and pasted directly into an AI chat.`;
 
     // Call Gemini API
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
     const result = await model.generateContent(metaPrompt);
     const response = await result.response;
     const generatedPrompt = response.text();
