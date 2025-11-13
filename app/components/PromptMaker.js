@@ -25,6 +25,7 @@ const { Option } = Select;
 export default function PromptMaker() {
   const [inputText, setInputText] = useState("");
   const [language, setLanguage] = useState("indonesian");
+  const [aiModel, setAiModel] = useState("gemini");
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -38,6 +39,11 @@ export default function PromptMaker() {
     { value: "japanese", label: "日本語" },
     { value: "korean", label: "한국어" },
     { value: "chinese", label: "中文" },
+  ];
+
+  const aiModelOptions = [
+    { value: "gemini", label: "Gemini (Google)" },
+    { value: "chatgpt", label: "ChatGPT (OpenAI)" },
   ];
 
   const generatePrompt = async () => {
@@ -58,6 +64,7 @@ export default function PromptMaker() {
         body: JSON.stringify({
           inputText,
           language,
+          aiModel,
         }),
       });
 
@@ -122,6 +129,25 @@ export default function PromptMaker() {
             }}
           >
             <Space direction="vertical" style={{ width: "100%" }} size={16}>
+              {/* AI Model Selection */}
+              <div>
+                <Text strong style={{ color: "#E8EAED", marginBottom: 8, display: "block" }}>
+                  Pilih AI Model
+                </Text>
+                <Select
+                  value={aiModel}
+                  onChange={setAiModel}
+                  style={{ width: "100%" }}
+                  size="large"
+                >
+                  {aiModelOptions.map((opt) => (
+                    <Option key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </Option>
+                  ))}
+                </Select>
+              </div>
+
               {/* Language Selection */}
               <div>
                 <Text strong style={{ color: "#E8EAED", marginBottom: 8, display: "block" }}>
@@ -151,6 +177,7 @@ export default function PromptMaker() {
                   onChange={(e) => setInputText(e.target.value)}
                   placeholder="Masukkan teks atau pertanyaan Anda..."
                   autoSize={{ minRows: 5, maxRows: 10 }}
+                  className="custom-textarea"
                   style={{
                     background: "#292A2D",
                     border: "1px solid #3C4043",
@@ -239,7 +266,7 @@ export default function PromptMaker() {
                   type="secondary"
                   style={{ color: "#9AA0A6", fontSize: 12, display: "block" }}
                 >
-                  🤖 Dibuat oleh Gemini AI • 💡 Salin dan gunakan prompt ini di chat AI manapun
+                  🤖 Dibuat oleh {aiModel === "gemini" ? "Gemini AI" : "ChatGPT"} • 💡 Salin dan gunakan prompt ini di chat AI manapun
                 </Text>
               </Space>
             </Card>

@@ -15,10 +15,12 @@ import {
   SettingOutlined,
   LogoutOutlined,
   UserOutlined,
+  LockOutlined,
 } from "@ant-design/icons";
 import ChatInterfaceContent from "./ChatInterfaceContent";
 import CommitGenerator from "./CommitGenerator";
 import PromptMaker from "./PromptMaker";
+import Base64Tool from "./Base64Tool";
 import { useTheme } from "./AntdThemeProvider";
 import { useAuth } from "./AuthContext";
 import { useChatContext } from "./ChatContext";
@@ -66,6 +68,12 @@ export default function MainLayout() {
       icon: <BulbOutlined />,
       label: "Prompt Maker",
       component: <PromptMaker key="prompt" />,
+    },
+    {
+      key: "base64-tool",
+      icon: <LockOutlined />,
+      label: "Base64 Tool",
+      component: <Base64Tool key="base64" />,
     },
   ], [handleSetNewChatTrigger]);
 

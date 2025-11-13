@@ -368,6 +368,18 @@ html {
   }
 }
 
+/* Custom textarea styling - no background change on hover */
+.custom-textarea.ant-input:hover,
+.custom-textarea.ant-input:focus {
+  background: #292A2D !important;
+  border-color: #8AB4F8 !important;
+  color: #E8EAED !important;
+}
+
+.custom-textarea.ant-input::placeholder {
+  color: #5F6368 !important;
+}
+
 /* Accessibility improvements */
 .ant-btn:focus-visible,
 .ant-input:focus-visible,
