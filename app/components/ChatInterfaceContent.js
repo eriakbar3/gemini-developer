@@ -232,11 +232,13 @@ export default function ChatInterfaceContent({ onNewChat }) {
                       cursor: "pointer",
                       transition: "all 0.2s ease",
                     }}
-                    bodyStyle={{
-                      padding: "20px",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "8px",
+                    styles={{
+                      body: {
+                        padding: "20px",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "8px",
+                      },
                     }}
                   >
                     <div style={{ fontSize: 20, color: "#9AA0A6" }}>{item.icon}</div>

@@ -52,12 +52,29 @@ export default function Base64Tool() {
     }
 
     try {
-      const decoded = decodeURIComponent(escape(atob(inputText.trim())));
+      const trimmedInput = inputText.trim();
+
+      // Validasi format Base64 - hanya boleh A-Z, a-z, 0-9, +, /, =, dan whitespace
+      if (!/^[A-Za-z0-9+/=\s]*$/.test(trimmedInput)) {
+        message.error("Input bukan Base64 yang valid. Hanya gunakan karakter: A-Z, a-z, 0-9, +, /, =");
+        return;
+      }
+
+      // Bersihkan whitespace
+      const cleanedInput = trimmedInput.replace(/\s/g, "");
+
+      // Validasi panjang (harus kelipatan 4)
+      if (cleanedInput.length % 4 !== 0) {
+        message.error("Panjang Base64 tidak valid. Harus kelipatan 4 karakter!");
+        return;
+      }
+
+      const decoded = decodeURIComponent(escape(atob(cleanedInput)));
       setOutputText(decoded);
       message.success("Berhasil di-decode dari Base64!");
     } catch (error) {
       console.error("Decode error:", error);
-      message.error("Gagal decode. Pastikan Base64 valid!");
+      message.error("Gagal decode. Input Base64 tidak valid atau corrupted!");
     }
   };
 

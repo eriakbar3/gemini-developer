@@ -16,11 +16,15 @@ import {
   LogoutOutlined,
   UserOutlined,
   LockOutlined,
+  FileTextOutlined,
+  ThunderboltOutlined,
 } from "@ant-design/icons";
 import ChatInterfaceContent from "./ChatInterfaceContent";
 import CommitGenerator from "./CommitGenerator";
 import PromptMaker from "./PromptMaker";
 import Base64Tool from "./Base64Tool";
+import LogPreview from "./LogPreview";
+import StreamPreview from "./StreamPreview";
 import { useTheme } from "./AntdThemeProvider";
 import { useAuth } from "./AuthContext";
 import { useChatContext } from "./ChatContext";
@@ -74,6 +78,18 @@ export default function MainLayout() {
       icon: <LockOutlined />,
       label: "Base64 Tool",
       component: <Base64Tool key="base64" />,
+    },
+    {
+      key: "log-preview",
+      icon: <FileTextOutlined />,
+      label: "Log Preview",
+      component: <LogPreview key="log" />,
+    },
+    {
+      key: "stream-preview",
+      icon: <ThunderboltOutlined />,
+      label: "Stream Preview",
+      component: <StreamPreview key="stream" />,
     },
   ], [handleSetNewChatTrigger]);
 
@@ -354,8 +370,10 @@ export default function MainLayout() {
         onClose={() => setMobileSidebarOpen(false)}
         open={mobileSidebarOpen}
         width={280}
-        bodyStyle={{ padding: 0, background: "#1E1F20" }}
-        headerStyle={{ display: "none" }}
+        styles={{
+          body: { padding: 0, background: "#1E1F20" },
+          header: { display: "none" },
+        }}
       >
         <SidebarContent />
       </Drawer>

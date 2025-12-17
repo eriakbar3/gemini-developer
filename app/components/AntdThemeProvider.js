@@ -1,6 +1,6 @@
 "use client";
 
-import { ConfigProvider, theme as antdTheme } from "antd";
+import { ConfigProvider, theme as antdTheme, App as AntdApp } from "antd";
 import { useState, useEffect, createContext, useContext } from "react";
 import { designTokens } from "../design-tokens";
 
@@ -176,7 +176,9 @@ const AntdThemeProvider = ({ children }) => {
           },
         }}
       >
-        {children}
+        <AntdApp>
+          {children}
+        </AntdApp>
       </ConfigProvider>
     </ThemeContext.Provider>
   );
